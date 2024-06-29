@@ -1,5 +1,6 @@
 package se.lexicon;
 
+
 import java.time.LocalDate;
 
 public class TodoItem {
@@ -10,6 +11,9 @@ public class TodoItem {
     public boolean done;
     public Person creator;
 
+    public TodoItem() {
+        deadLine = LocalDate.parse("2024-06-31");
+    }
 
     public int getId() {
         return id;
@@ -55,6 +59,14 @@ public class TodoItem {
     public void setTitle(String title) {
         if (title == null) throw new IllegalArgumentException("Title is not allowed to be null!");
         this.title = title;
+    }
+
+    public boolean isOverdue() {
+        if (LocalDate.now().isBefore(deadLine)) return true;
+        return false;
+    }
+    public String getSummary(){
+        return getCreator().seePerson();
     }
 
 }
