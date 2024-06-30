@@ -19,7 +19,7 @@ public class TodoItemTask {
     }
 
     public void setTodoItem(TodoItem todoItem) {
-        if (todoItem == null) throw new IllegalArgumentException("TodoItem is not allowed to be null!");
+        if (todoItem == null) throw new IllegalArgumentException("Item is not allowed to be null!");
         this.todoItem = todoItem;
     }
 
@@ -30,4 +30,7 @@ public class TodoItemTask {
     public void setAssignee(Person assignee) {
         this.assignee = assignee;
     }
-}
+    public String getSummary(){
+        return "id: " + id + "asignee: " + assignee;
+    }
+    }

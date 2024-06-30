@@ -45,10 +45,7 @@ public class Person {
 
         this.email = email;
     }
-    public String seePerson(){
-        return "id: " + id + ", name: " + firstName + " " + lastName + ", email: " + email;
-    }
     public String getSummary() {
-        return seePerson();
+        return "id: " + id + ", name: " + firstName + " " + lastName + ", email: " + email;
     }
 }

@@ -57,7 +57,7 @@ public class TodoItem {
     }
 
     public void setTitle(String title) {
-        if (title == null) throw new IllegalArgumentException("Title is not allowed to be null!");
+        if (title == null || title.trim().isEmpty()) throw new IllegalArgumentException("Title is not allowed to be null or empty!");
         this.title = title;
     }
 
@@ -66,7 +66,7 @@ public class TodoItem {
         return false;
     }
     public String getSummary(){
-        return getCreator().seePerson();
+        return "id: " + id + "creator" + creator;
     }
 
 }
