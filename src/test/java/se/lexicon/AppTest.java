@@ -1,5 +1,6 @@
 package se.lexicon;
 
+import junit.framework.Assert;
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
@@ -9,6 +10,7 @@ import junit.framework.TestSuite;
  */
 public class AppTest
         extends TestCase {
+
     /**
      * Create the test case
      *
@@ -31,7 +33,14 @@ public class AppTest
     public void testApp() {
         Person person1 = new Person(1, "Casper", "Nilsson", "caspernilsson13@gmail.com");
         String expectedOutput = "id: 1, name: Casper Nilsson, email: caspernilsson13@gmail.com";
-        assert person1.getSummary().equals(expectedOutput) : "Output";
+        assert person1.toString().equals(expectedOutput) : "Output";
+
+
+        AppUser user1 = new AppUser("CasNil", "test123", AppRole.ROLE_APP_ADMIN);
+        AppUser user2 = new AppUser("CasNil", "test123", AppRole.ROLE_APP_ADMIN);
+        assertTrue(user1.equals(user2));
+        assertEquals(user1.hashCode(),user2.hashCode());
+
     }
 
 }

@@ -13,6 +13,7 @@ public class App
         user.setRole(AppRole.ROLE_APP_USER);
         System.out.println("-----------");
         System.out.println(user.getRole());
+
     }
 
 }
