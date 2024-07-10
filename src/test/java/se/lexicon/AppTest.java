@@ -1,9 +1,11 @@
 package se.lexicon;
 
-import junit.framework.Assert;
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
+import se.lexicon.model.AppRole;
+import se.lexicon.model.AppUser;
+import se.lexicon.model.Person;
 
 /**
  * Unit test for simple App.
