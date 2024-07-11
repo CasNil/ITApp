@@ -12,8 +12,16 @@ public class TodoItem {
     public boolean done;
     public Person creator;
 
-    public TodoItem() {
-        deadLine = LocalDate.parse("2024-06-31");
+    public TodoItem(String title, String taskDescription, LocalDate deadLine, boolean done, Person creator) {
+        this.title = title;
+        this.taskDescription = taskDescription;
+        this.deadLine = deadLine;
+        this.done = done;
+        this.creator = creator;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public int getId() {
@@ -25,6 +33,7 @@ public class TodoItem {
     }
 
     public void setCreator(Person creator) {
+        if (creator == null) throw new IllegalArgumentException("creator is not allowed to be null!");
         this.creator = creator;
     }
 
@@ -64,8 +73,7 @@ public class TodoItem {
     }
 
     public boolean isOverdue() {
-        if (LocalDate.now().isBefore(deadLine)) return true;
-        return false;
+        return LocalDate.now().isAfter(deadLine);
     }
 
     @Override

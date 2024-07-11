@@ -3,6 +3,7 @@ package se.lexicon.model;
 import java.util.Objects;
 
 public class AppUser {
+
     private String username;
     private String password;
     private AppRole role;

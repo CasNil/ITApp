@@ -29,13 +29,18 @@ public class Person {
         return firstName;
     }
 
-    public int getId() {
-        return id;
-    }
 
     public void setFirstName(String firstName) {
         if (firstName == null) throw new IllegalArgumentException("Firstname is not allowed to be null!");
         this.firstName = firstName;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getLastName() {

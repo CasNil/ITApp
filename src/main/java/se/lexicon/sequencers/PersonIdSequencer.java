@@ -3,8 +3,10 @@ package se.lexicon.sequencers;
 public class PersonIdSequencer {
     private static int currentID;
 
+    private static int sequencer = 0;
+
     public static int nextId() {
-        return 0;
+        return ++sequencer;
     }
 
     public static int getCurrentID() {
