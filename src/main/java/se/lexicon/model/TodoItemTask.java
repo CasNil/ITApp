@@ -8,12 +8,21 @@ public class TodoItemTask {
     private TodoItem todoItem;
     private Person assignee;
 
+    public TodoItemTask(TodoItem todoItem, Person assignee) {
+        this.todoItem = todoItem;
+        this.assignee = assignee;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public int getId() {
         return id;
     }
 
-    public void setAssigned(boolean assigned) {
-        this.assigned = assigned;
+    public boolean isAssigned() {
+        return assigned;
     }
 
     public TodoItem getTodoItem() {

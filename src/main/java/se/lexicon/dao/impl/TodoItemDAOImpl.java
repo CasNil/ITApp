@@ -19,6 +19,9 @@ public class TodoItemDAOImpl implements TodoItemDAO {
     @Override
     public TodoItem persist(TodoItem todoItem) {
         if (todoItem.getId() != 0) throw new IllegalArgumentException("Item id was not 0 ");
+        if (items.contains(todoItem)) {
+            throw new IllegalArgumentException("Item already exists");
+        }
         todoItem.setId(TodoItemIdSequencer.nextId());
         items.add(todoItem);
         return todoItem;

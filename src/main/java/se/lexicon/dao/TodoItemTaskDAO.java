@@ -3,7 +3,6 @@ package se.lexicon.dao;
 import se.lexicon.model.Person;
 import se.lexicon.model.TodoItemTask;
 
-import java.util.Collection;
 import java.util.List;
 
 public interface TodoItemTaskDAO {
@@ -16,7 +15,7 @@ public interface TodoItemTaskDAO {
 
     List<TodoItemTask> findByAssignedStatus(boolean assignedStatus);
 
-    List<TodoItemTask> findByPersonId(int Id);
+    List<TodoItemTask> findByPersonId(int personId);
 
     TodoItemTask addAssignee(int idTask, Person person);
 

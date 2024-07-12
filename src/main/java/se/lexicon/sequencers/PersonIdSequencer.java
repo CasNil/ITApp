@@ -13,7 +13,7 @@ public class PersonIdSequencer {
         return currentID;
     }
 
-    public static void setCurrentID(int currentID) {
-        PersonIdSequencer.currentID = currentID;
+    public static void setCurrentID(int currentId) {
+        PersonIdSequencer.currentID = currentId;
     }
 }

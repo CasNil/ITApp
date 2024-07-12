@@ -13,7 +13,7 @@ public class TodoItemIdSequencer {
         return currentID;
     }
 
-    public static void setCurrentID(int currentID) {
-        TodoItemIdSequencer.currentID = currentID;
+    public static void setCurrentID(int currentId) {
+        TodoItemIdSequencer.currentID = currentId;
     }
 }
