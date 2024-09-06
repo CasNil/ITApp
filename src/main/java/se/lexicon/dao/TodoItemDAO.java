@@ -1,28 +1,27 @@
 package se.lexicon.dao;
 
+import se.lexicon.model.Person;
 import se.lexicon.model.TodoItem;
 
-import java.time.LocalDate;
 import java.util.Collection;
-import java.util.List;
 
 public interface TodoItemDAO {
-    TodoItem persist(TodoItem todoItem);
+    TodoItem create(TodoItem todoItem);
+
+    Collection<TodoItem> findAll();
 
     TodoItem findById(int id);
 
-    List<TodoItem> findAll();
+    Collection<TodoItem> findByDoneStatus(boolean doneStatus);
 
-    List<TodoItem> findAllByDoneStatus(boolean doneStatus);
+    Collection<TodoItem> findByAssignee(int assignee);
 
-    List<TodoItem> findByTitleContains(String query);
+    Collection<TodoItem> findByAssignee(Person person);
 
-    List<TodoItem> findByPersonId(int Id);
+    Collection<TodoItem> findByUnassignedTodoItems();
 
-    List<TodoItem> findByDeadlineBefore(LocalDate date);
+    TodoItem update(TodoItem todoItem);
 
-    List<TodoItem> findByDeadlineAfter(LocalDate date);
-
-    void remove(int id);
+    boolean deleteById(int id);
 
 }

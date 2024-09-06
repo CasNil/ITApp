@@ -12,12 +12,28 @@ public class TodoItem {
     public boolean done;
     public Person creator;
 
+    public TodoItem(int id, String title, String taskDescription, LocalDate deadLine, boolean done, Person creator) {
+        this.id = id;
+        this.title = title;
+        this.taskDescription = taskDescription;
+        this.deadLine = deadLine;
+        this.done = done;
+        this.creator = creator;
+    }
+
     public TodoItem(String title, String taskDescription, LocalDate deadLine, boolean done, Person creator) {
         this.title = title;
         this.taskDescription = taskDescription;
         this.deadLine = deadLine;
         this.done = done;
         this.creator = creator;
+    }
+
+    public TodoItem(int id, String title, String taskDescription, LocalDate deadLine) {
+        this.id = id;
+        this.title = title;
+        this.taskDescription = taskDescription;
+        this.deadLine = deadLine;
     }
 
     public void setId(int id) {

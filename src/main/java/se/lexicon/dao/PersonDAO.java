@@ -2,19 +2,20 @@ package se.lexicon.dao;
 
 import se.lexicon.model.Person;
 
+import java.util.Collection;
 import java.util.List;
 
 public interface PersonDAO {
-    Person persist(Person person);
+    Person create(Person person);
+
+    Collection<Person> findAll();
 
     Person findById(int id);
 
-    Person findByEmail(String email);
+    Collection<Person> findByName(String name);
 
-    Person findByUsername(String username);
+    Person update(Person person);
 
-    List<Person> findAll();
-
-    void remove(int id);
+    boolean deleteById(int id);
 
 }
