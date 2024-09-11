@@ -86,7 +86,7 @@ public class PersonDAOImpl implements PersonDAO {
     @Override
     public Collection<Person> findByName(String name) {
         Collection<Person> personList = new ArrayList<>();
-        String query = "SELECT first_name, last_name FROM person WHERE first_name = ? OR last_name = ?";
+        String query = "SELECT * FROM person WHERE first_name = ? OR last_name = ?";
         try (Connection connection = MySQLConnection.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
 
@@ -110,15 +110,14 @@ public class PersonDAOImpl implements PersonDAO {
 
     @Override
     public Person update(Person person) {
-        String query = "UPDATE person SET first_name = ?, last_name = ?, email = ? WHERE id = ?";
+        String query = "UPDATE person SET first_name = ?, last_name = ? WHERE id = ?";
 
         try (Connection connection = MySQLConnection.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
 
             preparedStatement.setString(1, person.getFirstName());
             preparedStatement.setString(2, person.getLastName());
-            preparedStatement.setString(3, person.getEmail());
-            preparedStatement.setInt(4, person.getId());
+            preparedStatement.setInt(3, person.getId());
 
             int rowsAffected = preparedStatement.executeUpdate();
 

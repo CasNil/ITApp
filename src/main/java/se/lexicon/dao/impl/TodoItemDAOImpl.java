@@ -23,7 +23,7 @@ public class TodoItemDAOImpl implements TodoItemDAO {
              PreparedStatement preparedStatement = connection.prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS)) {
 
             preparedStatement.setString(1, todoItem.getTitle());
-            preparedStatement.setString(2, todoItem.getTaskDescription());
+            preparedStatement.setString(2, todoItem.getDescription());
 
             LocalDateTime localDateTime = todoItem.getDeadLine().atStartOfDay();
             Timestamp timestamp = Timestamp.valueOf(localDateTime);
@@ -35,7 +35,7 @@ public class TodoItemDAOImpl implements TodoItemDAO {
                 try (ResultSet generatedKeys = preparedStatement.getGeneratedKeys()) {
                     if (generatedKeys.next()) {
                         int id = generatedKeys.getInt(1);
-                        insertedTodoItem = new TodoItem(id, todoItem.getTitle(), todoItem.getTaskDescription(), todoItem.getDeadLine());
+                        insertedTodoItem = new TodoItem(id, todoItem.getTitle(), todoItem.getDescription(), todoItem.getDeadLine());
                     }
                 }
             }
@@ -48,7 +48,7 @@ public class TodoItemDAOImpl implements TodoItemDAO {
 
     @Override
     public Collection<TodoItem> findAll() {
-        String query = "SELECT todo_id, title, description, deadline FROM todo_item";
+        String query = "SELECT * FROM todo_item";
         Collection<TodoItem> todoItemList = new ArrayList<>();
 
 
@@ -62,10 +62,12 @@ public class TodoItemDAOImpl implements TodoItemDAO {
                 String title = rs.getString("title");
                 String description = rs.getString("description");
                 Timestamp deadlineTimestamp = rs.getTimestamp("deadline");
+                boolean done = rs.getBoolean("done");
+                int assigneeId = rs.getInt("assignee_id");
 
                 LocalDate deadline = deadlineTimestamp.toLocalDateTime().toLocalDate();
 
-                TodoItem todoItem = new TodoItem(itemId, title, description, deadline);
+                TodoItem todoItem = new TodoItem(itemId, title, description, deadline, done, assigneeId);
                 todoItemList.add(todoItem);
             }
 
@@ -77,7 +79,7 @@ public class TodoItemDAOImpl implements TodoItemDAO {
 
     @Override
     public TodoItem findById(int id) {
-        String query = "SELECT todo_id, title, description, deadline FROM todo_item WHERE todo_id = ?";
+        String query = "SELECT * FROM todo_item WHERE todo_id = ?";
         TodoItem todoItem = null;
 
         try (Connection connection = MySQLConnection.getConnection();
@@ -91,12 +93,14 @@ public class TodoItemDAOImpl implements TodoItemDAO {
                     String title = rs.getString("title");
                     String description = rs.getString("description");
                     Timestamp deadlineTimestamp = rs.getTimestamp("deadline");
+                    boolean done = rs.getBoolean("done");
+                    int assigneeId = rs.getInt("assignee_id");
 
                     LocalDate deadline = null;
                     if (deadlineTimestamp != null) {
                         deadline = deadlineTimestamp.toLocalDateTime().toLocalDate();
                     }
-                    todoItem = new TodoItem(todoId, title, description, deadline);
+                    todoItem = new TodoItem(todoId, title, description, deadline, done, assigneeId);
                 }
             }
 
@@ -108,7 +112,7 @@ public class TodoItemDAOImpl implements TodoItemDAO {
 
     @Override
     public Collection<TodoItem> findByDoneStatus(boolean doneStatus) {
-        String query = "SELECT todo_id, title, description, deadline FROM todo_item WHERE done = ?";
+        String query = "SELECT * FROM todo_item WHERE done = ?";
         Collection<TodoItem> todoItems = new ArrayList<>();
 
         try (Connection connection = MySQLConnection.getConnection();
@@ -122,12 +126,14 @@ public class TodoItemDAOImpl implements TodoItemDAO {
                     String title = rs.getString("title");
                     String description = rs.getString("description");
                     Timestamp deadlineTimestamp = rs.getTimestamp("deadline");
+                    boolean done = rs.getBoolean("done");
+                    int assigneeId = rs.getInt("assignee_id");
 
                     LocalDate deadline = null;
                     if (deadlineTimestamp != null) {
                         deadline = deadlineTimestamp.toLocalDateTime().toLocalDate();
                     }
-                    TodoItem todoItem = new TodoItem(todoId, title, description, deadline);
+                    TodoItem todoItem = new TodoItem(todoId, title, description, deadline, done, assigneeId);
                     todoItems.add(todoItem);
                 }
             }
@@ -141,7 +147,7 @@ public class TodoItemDAOImpl implements TodoItemDAO {
 
     @Override
     public Collection<TodoItem> findByAssignee(int assignee) {
-        String query = "SELECT todo_id, title, description, deadline FROM todo_item WHERE assignee_id = ?";
+        String query = "SELECT * FROM todo_item WHERE assignee_id = ?";
         Collection<TodoItem> todoItems = new ArrayList<>();
 
         try (Connection connection = MySQLConnection.getConnection();
@@ -155,13 +161,15 @@ public class TodoItemDAOImpl implements TodoItemDAO {
                     String title = rs.getString("title");
                     String description = rs.getString("description");
                     Timestamp deadlineTimestamp = rs.getTimestamp("deadline");
+                    boolean done = rs.getBoolean("done");
+                    int assigneeId = rs.getInt("assignee_id");
 
 
                     LocalDate deadline = null;
                     if (deadlineTimestamp != null) {
                         deadline = deadlineTimestamp.toLocalDateTime().toLocalDate();
                     }
-                    TodoItem todoItem = new TodoItem(todoId, title, description, deadline);
+                    TodoItem todoItem = new TodoItem(todoId, title, description, deadline, done, assigneeId);
                     todoItems.add(todoItem);
                 }
             }
@@ -174,7 +182,7 @@ public class TodoItemDAOImpl implements TodoItemDAO {
 
     @Override
     public Collection<TodoItem> findByAssignee(Person person) {
-        String query = "SELECT todo_id, title, description, deadline FROM todo_item WHERE assignee_id = ?";
+        String query = "SELECT * FROM todo_item WHERE assignee_id = ?";
         Collection<TodoItem> todoItems = new ArrayList<>();
 
         try (Connection connection = MySQLConnection.getConnection();
@@ -187,15 +195,16 @@ public class TodoItemDAOImpl implements TodoItemDAO {
             while (rs.next()) {
                 int id = rs.getInt("todo_id");
                 String title = rs.getString("title");
-                String taskDescription = rs.getString("taskDescription");
+                String taskDescription = rs.getString("description");
                 Timestamp deadlineTimestamp = rs.getTimestamp("deadline");
                 boolean done = rs.getBoolean("done");
+                int assigneeId = rs.getInt("assignee_id");
 
                 LocalDate deadline = null;
                 if (deadlineTimestamp != null) {
                     deadline = deadlineTimestamp.toLocalDateTime().toLocalDate();
                 }
-                TodoItem item = new TodoItem(id, title, taskDescription, deadline, done, person);
+                TodoItem item = new TodoItem(id, title, taskDescription, deadline, done, person, assigneeId);
 
                 todoItems.add(item);
             }
@@ -222,12 +231,14 @@ public class TodoItemDAOImpl implements TodoItemDAO {
                 String description = rs.getString("description");
                 Timestamp deadlineTimestamp = rs.getTimestamp("deadline");
                 boolean doneStatus = rs.getBoolean("done");
+                int assigneeId = rs.getInt("assignee_id");
+
 
                 LocalDate deadline = null;
                 if (deadlineTimestamp != null) {
                     deadline = deadlineTimestamp.toLocalDateTime().toLocalDate();
                 }
-                TodoItem item = new TodoItem(todoId, title, description, deadline, doneStatus, null);
+                TodoItem item = new TodoItem(todoId, title, description, deadline, doneStatus, null, assigneeId);
 
                 todoItems.add(item);
             }
@@ -246,7 +257,7 @@ public class TodoItemDAOImpl implements TodoItemDAO {
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
 
             preparedStatement.setString(1, todoItem.getTitle());
-            preparedStatement.setString(2, todoItem.getTaskDescription());
+            preparedStatement.setString(2, todoItem.getDescription());
             preparedStatement.setTimestamp(3, todoItem.getDeadLine() != null ? Timestamp.valueOf(todoItem.getDeadLine().atStartOfDay()) : null);
             preparedStatement.setBoolean(4, todoItem.isDone());
             preparedStatement.setObject(5, todoItem.getCreator() != null ? todoItem.getCreator().getId() : null, Types.INTEGER);

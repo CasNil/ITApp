@@ -6,33 +6,37 @@ import java.util.Objects;
 
 public class TodoItem {
     private int id;
-    public String title;
-    public String taskDescription;
-    public LocalDate deadLine;
-    public boolean done;
-    public Person creator;
+    private String title;
+    private String description;
+    private LocalDate deadLine;
+    private boolean done;
+    private Person creator;
+    private int assigneeId;
 
-    public TodoItem(int id, String title, String taskDescription, LocalDate deadLine, boolean done, Person creator) {
+
+    public TodoItem(int id, String title, String description, LocalDate deadLine, boolean done, Person creator, int assigneeId) {
         this.id = id;
         this.title = title;
-        this.taskDescription = taskDescription;
+        this.description = description;
         this.deadLine = deadLine;
         this.done = done;
         this.creator = creator;
+        this.assigneeId = assigneeId;
     }
 
-    public TodoItem(String title, String taskDescription, LocalDate deadLine, boolean done, Person creator) {
-        this.title = title;
-        this.taskDescription = taskDescription;
-        this.deadLine = deadLine;
-        this.done = done;
-        this.creator = creator;
-    }
-
-    public TodoItem(int id, String title, String taskDescription, LocalDate deadLine) {
+    public TodoItem(int id, String title, String description, LocalDate deadLine, boolean done, int assigneeId) {
         this.id = id;
         this.title = title;
-        this.taskDescription = taskDescription;
+        this.description = description;
+        this.deadLine = deadLine;
+        this.done = done;
+        this.assigneeId = assigneeId;
+    }
+
+    public TodoItem(int id, String title, String description, LocalDate deadLine) {
+        this.id = id;
+        this.title = title;
+        this.description = description;
         this.deadLine = deadLine;
     }
 
@@ -70,12 +74,12 @@ public class TodoItem {
         this.deadLine = deadLine;
     }
 
-    public String getTaskDescription() {
-        return taskDescription;
+    public String getDescription() {
+        return description;
     }
 
-    public void setTaskDescription(String taskDescription) {
-        this.taskDescription = taskDescription;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getTitle() {
@@ -88,13 +92,11 @@ public class TodoItem {
         this.title = title;
     }
 
-    public boolean isOverdue() {
-        return LocalDate.now().isAfter(deadLine);
-    }
+
 
     @Override
     public String toString() {
-        return "Id: " + id + ", Title: " + title + ", Task: " + taskDescription + ", Deadline: " + deadLine + ", Done: " + done + ", Creator: " + creator;
+        return "Id: " + id + ", Title: " + title + ", Task: " + description + ", Deadline: " + deadLine + ", Done: " + done + ", Creator: " + creator;
     }
 
     @Override
@@ -102,7 +104,7 @@ public class TodoItem {
         {
             if (this == obj) return true;
             if (obj == null || getClass() != obj.getClass()) return false;
-            return (Objects.equals(id, ((TodoItem) obj).id) && Objects.equals(title, ((TodoItem) obj).title) && Objects.equals(taskDescription, ((TodoItem) obj).taskDescription) && Objects.equals(deadLine, ((TodoItem) obj).deadLine) && Objects.equals(done, ((TodoItem) obj).done) && Objects.equals(creator, ((TodoItem) obj).creator));
+            return (Objects.equals(id, ((TodoItem) obj).id) && Objects.equals(title, ((TodoItem) obj).title) && Objects.equals(description, ((TodoItem) obj).description) && Objects.equals(deadLine, ((TodoItem) obj).deadLine) && Objects.equals(done, ((TodoItem) obj).done) && Objects.equals(creator, ((TodoItem) obj).creator));
         }
     }
 
@@ -113,7 +115,7 @@ public class TodoItem {
         int result = 1;
         result = prime * result + Objects.hashCode(id);
         result = prime * result + Objects.hashCode(title);
-        result = prime * result + Objects.hashCode(taskDescription);
+        result = prime * result + Objects.hashCode(description);
         result = prime * result + Objects.hashCode(deadLine);
         result = prime * result + Objects.hashCode(done);
         result = prime * result + Objects.hashCode(creator);
