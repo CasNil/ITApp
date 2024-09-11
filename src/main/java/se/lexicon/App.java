@@ -2,11 +2,6 @@ package se.lexicon;
 
 import se.lexicon.dao.PersonDAO;
 import se.lexicon.dao.impl.PersonDAOImpl;
-import se.lexicon.model.AppRole;
-import se.lexicon.model.AppUser;
-import se.lexicon.model.Person;
-
-import java.util.Collection;
 
 /**
  * Hello world!

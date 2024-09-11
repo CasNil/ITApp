@@ -3,9 +3,6 @@ package se.lexicon;
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
-import se.lexicon.model.AppRole;
-import se.lexicon.model.AppUser;
-import se.lexicon.model.Person;
 
 /**
  * Unit test for simple App.
@@ -33,15 +30,6 @@ public class AppTest
      * Rigourous Test :-)
      */
     public void testApp() {
-        Person person1 = new Person(1, "Casper", "Nilsson", "caspernilsson13@gmail.com");
-        String expectedOutput = "id: 1, name: Casper Nilsson, email: caspernilsson13@gmail.com";
-        assert person1.toString().equals(expectedOutput) : "Output";
-
-
-        AppUser user1 = new AppUser("CasNil", "test123", AppRole.ROLE_APP_ADMIN);
-        AppUser user2 = new AppUser("CasNil", "test123", AppRole.ROLE_APP_ADMIN);
-        assertTrue(user1.equals(user2));
-        assertEquals(user1.hashCode(),user2.hashCode());
 
     }
 

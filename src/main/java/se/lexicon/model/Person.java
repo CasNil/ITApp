@@ -7,7 +7,6 @@ public class Person {
     private String firstName;
     private String lastName;
     private String email;
-    private AppUser credentials;
 
     public Person(String firstName, String lastName) {
         this.firstName = firstName;
@@ -26,14 +25,6 @@ public class Person {
         this.lastName = lastName;
         this.email = email;
 
-    }
-
-    public AppUser getCredentials() {
-        return credentials;
-    }
-
-    public void setCredentials(AppUser credentials) {
-        this.credentials = credentials;
     }
 
     public String getFirstName() {
