@@ -81,7 +81,6 @@ public class TodoItem {
     }
 
 
-
     @Override
     public String toString() {
         return "Id: " + id + ", Title: " + title + ", Task: " + description + ", Deadline: " + deadLine + ", Done: " + done + ", Creator: " + creator;
@@ -97,18 +96,4 @@ public class TodoItem {
         }
     }
 
-    @Override
-    public int hashCode() {
-
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + Objects.hashCode(id);
-        result = prime * result + Objects.hashCode(title);
-        result = prime * result + Objects.hashCode(description);
-        result = prime * result + Objects.hashCode(deadLine);
-        result = prime * result + Objects.hashCode(done);
-        result = prime * result + Objects.hashCode(creator);
-
-        return result;
-    }
 }

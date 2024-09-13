@@ -46,7 +46,6 @@ public class Person {
     }
 
 
-
     @Override
     public String toString() {
         return "id: " + id + ", name: " + firstName + " " + lastName;
@@ -57,16 +56,5 @@ public class Person {
         if (this == obj) return true;
         if (obj == null || getClass() != obj.getClass()) return false;
         return (Objects.equals(firstName, ((Person) obj).firstName) && Objects.equals(lastName, ((Person) obj).lastName));
-    }
-
-    @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + Objects.hashCode(id);
-        result = prime * result + Objects.hashCode(firstName);
-        result = prime * result + Objects.hashCode(lastName);
-
-        return result;
     }
 }
