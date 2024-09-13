@@ -40,9 +40,6 @@ public class TodoItem {
         this.deadLine = deadLine;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public int getId() {
         return id;
@@ -57,6 +54,10 @@ public class TodoItem {
         this.creator = creator;
     }
 
+    public int getAssigneeId() {
+        return assigneeId;
+    }
+
     public boolean isDone() {
         return done;
     }
@@ -69,27 +70,14 @@ public class TodoItem {
         return deadLine;
     }
 
-    public void setDeadLine(LocalDate deadLine) {
-        if (deadLine == null) throw new IllegalArgumentException("deadLine is not allowed to be null!");
-        this.deadLine = deadLine;
-    }
 
     public String getDescription() {
         return description;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
 
     public String getTitle() {
         return title;
-    }
-
-    public void setTitle(String title) {
-        if (title == null || title.trim().isEmpty())
-            throw new IllegalArgumentException("Title is not allowed to be null or empty!");
-        this.title = title;
     }
 
 
@@ -98,6 +86,7 @@ public class TodoItem {
     public String toString() {
         return "Id: " + id + ", Title: " + title + ", Task: " + description + ", Deadline: " + deadLine + ", Done: " + done + ", Creator: " + creator;
     }
+
 
     @Override
     public boolean equals(Object obj) {

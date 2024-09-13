@@ -200,6 +200,8 @@ public class TodoItemDAOImpl implements TodoItemDAO {
                 boolean done = rs.getBoolean("done");
                 int assigneeId = rs.getInt("assignee_id");
 
+
+
                 LocalDate deadline = null;
                 if (deadlineTimestamp != null) {
                     deadline = deadlineTimestamp.toLocalDateTime().toLocalDate();
